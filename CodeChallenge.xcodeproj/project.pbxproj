@@ -12,7 +12,17 @@
 		63DFAD41206EAEF400F20F01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DFAD3F206EAEF400F20F01 /* Main.storyboard */; };
 		63DFAD43206EAEF400F20F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DFAD42206EAEF400F20F01 /* Assets.xcassets */; };
 		63DFAD46206EAEF400F20F01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DFAD44206EAEF400F20F01 /* LaunchScreen.storyboard */; };
-		63DFAD51206EAEF400F20F01 /* CodeChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD50206EAEF400F20F01 /* CodeChallengeTests.swift */; };
+		63DFAD51206EAEF400F20F01 /* TransactionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD50206EAEF400F20F01 /* TransactionModelTests.swift */; };
+		63DFAD5D206EB37C00F20F01 /* BlockchainAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD5C206EB37C00F20F01 /* BlockchainAPI.swift */; };
+		63DFAD61206F268400F20F01 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD60206F268400F20F01 /* Transaction.swift */; };
+		63DFAD66206F305E00F20F01 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD65206F305E00F20F01 /* APIResult.swift */; };
+		63DFAD68206F33D100F20F01 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD67206F33D100F20F01 /* Wallet.swift */; };
+		63DFAD6A206F341900F20F01 /* WalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD69206F341900F20F01 /* WalletTests.swift */; };
+		63DFAD6C206FFF4C00F20F01 /* MultiAddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD6B206FFF4C00F20F01 /* MultiAddressResponse.swift */; };
+		63DFAD6E206FFF6F00F20F01 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD6D206FFF6F00F20F01 /* APITests.swift */; };
+		63DFAD702070072200F20F01 /* HTTPRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD6F2070072200F20F01 /* HTTPRequester.swift */; };
+		63DFAD73207009F300F20F01 /* multi_addr_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 63DFAD72207009F300F20F01 /* multi_addr_stub.json */; };
+		63DFAD7520700A2500F20F01 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFAD7420700A2500F20F01 /* BaseTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +44,18 @@
 		63DFAD45206EAEF400F20F01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DFAD47206EAEF400F20F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63DFAD4C206EAEF400F20F01 /* CodeChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		63DFAD50206EAEF400F20F01 /* CodeChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChallengeTests.swift; sourceTree = "<group>"; };
+		63DFAD50206EAEF400F20F01 /* TransactionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModelTests.swift; sourceTree = "<group>"; };
 		63DFAD52206EAEF400F20F01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63DFAD5C206EB37C00F20F01 /* BlockchainAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainAPI.swift; sourceTree = "<group>"; };
+		63DFAD60206F268400F20F01 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		63DFAD65206F305E00F20F01 /* APIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		63DFAD67206F33D100F20F01 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		63DFAD69206F341900F20F01 /* WalletTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTests.swift; sourceTree = "<group>"; };
+		63DFAD6B206FFF4C00F20F01 /* MultiAddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiAddressResponse.swift; sourceTree = "<group>"; };
+		63DFAD6D206FFF6F00F20F01 /* APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITests.swift; sourceTree = "<group>"; };
+		63DFAD6F2070072200F20F01 /* HTTPRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequester.swift; sourceTree = "<group>"; };
+		63DFAD72207009F300F20F01 /* multi_addr_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = multi_addr_stub.json; sourceTree = "<group>"; };
+		63DFAD7420700A2500F20F01 /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +100,8 @@
 				63DFAD47206EAEF400F20F01 /* Info.plist */,
 				63DFAD3B206EAEF400F20F01 /* AppDelegate.swift */,
 				63DFAD3D206EAEF400F20F01 /* TransactionListViewController.swift */,
+				63DFAD5F206F266800F20F01 /* Models */,
+				63DFAD5E206F263D00F20F01 /* Networking */,
 				63DFAD5B206EB01100F20F01 /* Resources */,
 			);
 			path = CodeChallenge;
@@ -88,7 +110,11 @@
 		63DFAD4F206EAEF400F20F01 /* CodeChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				63DFAD50206EAEF400F20F01 /* CodeChallengeTests.swift */,
+				63DFAD71207009D600F20F01 /* Stubs */,
+				63DFAD6D206FFF6F00F20F01 /* APITests.swift */,
+				63DFAD7420700A2500F20F01 /* BaseTest.swift */,
+				63DFAD50206EAEF400F20F01 /* TransactionModelTests.swift */,
+				63DFAD69206F341900F20F01 /* WalletTests.swift */,
 				63DFAD52206EAEF400F20F01 /* Info.plist */,
 			);
 			path = CodeChallengeTests;
@@ -102,6 +128,34 @@
 				63DFAD44206EAEF400F20F01 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		63DFAD5E206F263D00F20F01 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				63DFAD5C206EB37C00F20F01 /* BlockchainAPI.swift */,
+				63DFAD6F2070072200F20F01 /* HTTPRequester.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		63DFAD5F206F266800F20F01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63DFAD65206F305E00F20F01 /* APIResult.swift */,
+				63DFAD6B206FFF4C00F20F01 /* MultiAddressResponse.swift */,
+				63DFAD60206F268400F20F01 /* Transaction.swift */,
+				63DFAD67206F33D100F20F01 /* Wallet.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		63DFAD71207009D600F20F01 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				63DFAD72207009F300F20F01 /* multi_addr_stub.json */,
+			);
+			path = Stubs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DFAD73207009F300F20F01 /* multi_addr_stub.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,7 +262,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DFAD68206F33D100F20F01 /* Wallet.swift in Sources */,
+				63DFAD5D206EB37C00F20F01 /* BlockchainAPI.swift in Sources */,
+				63DFAD66206F305E00F20F01 /* APIResult.swift in Sources */,
+				63DFAD6C206FFF4C00F20F01 /* MultiAddressResponse.swift in Sources */,
 				63DFAD3E206EAEF400F20F01 /* TransactionListViewController.swift in Sources */,
+				63DFAD61206F268400F20F01 /* Transaction.swift in Sources */,
+				63DFAD702070072200F20F01 /* HTTPRequester.swift in Sources */,
 				63DFAD3C206EAEF400F20F01 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,7 +277,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63DFAD51206EAEF400F20F01 /* CodeChallengeTests.swift in Sources */,
+				63DFAD7520700A2500F20F01 /* BaseTest.swift in Sources */,
+				63DFAD6A206F341900F20F01 /* WalletTests.swift in Sources */,
+				63DFAD51206EAEF400F20F01 /* TransactionModelTests.swift in Sources */,
+				63DFAD6E206FFF6F00F20F01 /* APITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
