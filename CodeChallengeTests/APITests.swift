@@ -40,13 +40,13 @@ class APITests: BaseTest {
             case .value(let wallet):
                 XCTAssertEqual(wallet.finalBalance, 978813)
                 XCTAssertEqual(wallet.transactions.count, 50)
-                let first = wallet.transactions.first!
-                XCTAssertEqual(first.time, Date(timeIntervalSince1970: 1522252767))
-                XCTAssertEqual(first.hash, "054c2b86d1751aa93a2cee563dfb0fa7c2850c92ae7eb4098abf79cae2c928d1")
-                XCTAssertEqual(first.fee, 2610)
-                XCTAssertEqual(first.outputs.count, 2)
-                XCTAssertEqual(first.outputs[0].isChange, true)
-                XCTAssertEqual(first.outputs[1].isChange, false)
+                // just inspecting the first transaction in our stub
+                let transaction = wallet.transactions.filter { $0.hash == "054c2b86d1751aa93a2cee563dfb0fa7c2850c92ae7eb4098abf79cae2c928d1"}.first!
+                XCTAssertEqual(transaction.time, Date(timeIntervalSince1970: 1522252767))
+                XCTAssertEqual(transaction.fee, 2610)
+                XCTAssertEqual(transaction.outputs.count, 2)
+                XCTAssertEqual(transaction.outputs[0].isChange, true)
+                XCTAssertEqual(transaction.outputs[1].isChange, false)
                 expect.fulfill()
             }
         }
@@ -58,8 +58,8 @@ class APITests: BaseTest {
         let expect = expectation(description: "api test")
         let addr0 = "testaddr0"
         let addr1 = "testaddr1"
-        let limit = 60
-        let offset = 10
+        let limit: UInt = 60
+        let offset: UInt = 10
         
         let mockRequester = MockHTTPRequester()
         mockRequester.mockResponseData = dataFromStub("multi_addr_stub")

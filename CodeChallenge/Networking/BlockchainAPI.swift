@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TODO: make CustomNSError
 enum APIError : Error {
     /// Indicates something was wrong with creating a requesdt
     case invalidRequest
@@ -19,7 +18,7 @@ enum APIError : Error {
 class BlockchainAPI {
     private struct Constants {
         static let host = "https://blockchain.info"
-        static let defaultTransactionLimit = 50
+        static let defaultTransactionLimit: UInt = 50
     }
     
     let httpRequester: HTTPRequesting
@@ -32,7 +31,7 @@ class BlockchainAPI {
     
     // MARK: - Public
     
-    func fetchMultiAddress(_ addresses: [String], limit: Int = Constants.defaultTransactionLimit, offset: Int = 0, completion: @escaping ((APIResult<Wallet>) -> Void)) {
+    func fetchMultiAddress(_ addresses: [String], limit: UInt = Constants.defaultTransactionLimit, offset: UInt = 0, completion: @escaping ((APIResult<MultiAddressResponse>) -> Void)) {
         guard !addresses.isEmpty else {
             completion(.error(APIError.invalidRequest))
             return
@@ -47,12 +46,12 @@ class BlockchainAPI {
             case .error(let error):
                 completion(.error(error))
             case .value(let data):
-                let responseObject = try? JSONDecoder().decode(MutliAddressResponse.self, from: data)
-                guard let wallet = responseObject?.generateWallet() else {
+                guard let responseObject = try? JSONDecoder().decode(MultiAddressResponse.self, from: data) else {
                     completion(.error(APIError.genericError))
                     return
                 }
-                completion(.value(wallet))
+                
+                completion(.value(responseObject))
             }
         }
     }

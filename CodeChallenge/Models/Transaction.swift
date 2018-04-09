@@ -8,33 +8,34 @@
 
 import Foundation
 
-typealias Satoshi = Int
-
-
 /// Defines a transaction in the same way the backend API defines a transaction, less the unrequired fields for our purposes
-class Transaction : Hashable, Codable {
+class Transaction : Hashable, Decodable {
     let result: Satoshi
     let fee: Satoshi
     let time: Date
     let hash: String
-    let outputs: [TransactionOutput]
+    let index: UInt
+    let outputs: [TransactionIO]
+    let inputs: [TransactionIO]
     /// A transaction which has a result less than 0 is considered outgoing
     var isOutgoing: Bool {
         return result < 0
     }
     
     var hashValue: Int {
-        return hash.hashValue
+        return hash.hashValue ^ index.hashValue
     }
     
     // MARK: - Initializers
     
-    init(result: Satoshi, fee: Satoshi, time: Date, hash: String, outputs: [TransactionOutput]) {
+    init(result: Satoshi, fee: Satoshi, time: Date, hash: String, index: UInt, outputs: [TransactionIO], inputs: [TransactionIO]) {
         self.result = result
         self.fee = fee
         self.time = time
         self.hash = hash
+        self.index = index
         self.outputs = outputs
+        self.inputs = inputs
     }
     
     static func ==(lhs: Transaction, rhs: Transaction) -> Bool {
@@ -48,88 +49,28 @@ class Transaction : Hashable, Codable {
         case fee
         case time
         case hash
+        case index = "tx_index"
         case outputs = "out"
+        case inputs
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(result, forKey: .result)
-        try container.encode(fee, forKey: .fee)
-        try container.encode(time, forKey: .time)
-        try container.encode(hash, forKey: .hash)
-        try container.encode(outputs, forKey: .outputs)
-        
-    }
-    
+
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         result = try values.decode(Satoshi.self, forKey: .result)
         fee = try values.decode(Satoshi.self, forKey: .fee)
         hash = try values.decode(String.self, forKey: .hash)
-        outputs = try values.decode([TransactionOutput].self, forKey: .outputs)
+        index = try values.decode(UInt.self, forKey: .index)
+        outputs = try values.decode([TransactionIO].self, forKey: .outputs)
+        
+        inputs = try values.decode([NestedTransactionInput].self, forKey: .inputs).map { $0.prev_out }
         
         let seconds = try values.decode(TimeInterval.self, forKey: .time)
         time = Date(timeIntervalSince1970: seconds)
     }
 }
 
-
-class TransactionOutput : Hashable, Codable {
-    let value: Satoshi
-    let index: Int
-    let isSpent: Bool
-    let xPub: ExtendedPublicKey?
-    /// An output is considered change when it includes an xpub
-    var isChange: Bool {
-        return xPub != nil
-    }
-    
-    var hashValue: Int {
-        // for the purpose of this exercise, we'll define uniqueness by it's value and index
-        return value ^ index
-    }
-    
-    init(value: Satoshi, index: Int, isSpent: Bool, xPub: ExtendedPublicKey? = nil) {
-        self.value = value
-        self.index = index
-        self.isSpent = isSpent
-        self.xPub = xPub
-    }
-    
-    static func ==(lhs: TransactionOutput, rhs: TransactionOutput) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-    
-    // MARK: - Codable
-    
-    enum CodingKeys: String, CodingKey {
-        case value
-        case index = "tx_index"
-        case isSpent = "spent"
-        case xPub = "xpub"
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(value, forKey: .value)
-        try container.encode(index, forKey: .index)
-        try container.encode(isSpent, forKey: .isSpent)
-        try container.encode(xPub, forKey: .xPub)
-        
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        value = try values.decode(Satoshi.self, forKey: .value)
-        index = try values.decode(Int.self, forKey: .index)
-        isSpent = try values.decode(Bool.self, forKey: .isSpent)
-        xPub = try? values.decode(ExtendedPublicKey.self, forKey: .xPub)
-        
-    }
+// lightweight model to extract the multiple prev_out from the response object
+fileprivate class NestedTransactionInput : Decodable {
+    let prev_out: TransactionIO
 }
 
-
-struct ExtendedPublicKey: Codable {
-    let m: String
-    let path: String
-}

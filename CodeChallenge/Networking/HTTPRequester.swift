@@ -8,12 +8,15 @@
 
 import Foundation
 
+
+/// Defines methods that a conforming class should implement to make HTTP calls
 protocol HTTPRequesting {
     func get(_ path: String, params: [String: String], completion: @escaping ((APIResult<Data>) -> Void))
 }
 
 extension HTTPRequesting {
 
+    /// Helpers method to resolve a full URI from a host, path, and parameters
     func resolvedHost(_ host: String, path: String, params: [String: String]) -> URL? {
         var path = path
         if path.first != "/" {
@@ -25,6 +28,7 @@ extension HTTPRequesting {
     }
 }
 
+/// Handles making HTTP requests
 class HTTPRequester: HTTPRequesting {
     
     let host: String

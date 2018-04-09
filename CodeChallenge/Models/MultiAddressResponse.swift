@@ -8,19 +8,18 @@
 
 import Foundation
 
-class MutliAddressResponse : Decodable {
-    private let finalBalance: Satoshi
-    private let transactions: [Transaction]
-    
-    func generateWallet() -> Wallet {
-        return Wallet(finalBalance: finalBalance, transactions: transactions)
-    }
+/// Models a response from the /multiaddr endpoint
+class MultiAddressResponse : Decodable {
+    let finalBalance: Satoshi
+    let transactions: [Transaction]
+    let addresses: [String]
     
     // MARK: - Codable
     
     enum CodingKeys: String, CodingKey {
         case wallet = "wallet"
         case transactions = "txs"
+        case addresses
     }
     
     enum WalletCodingKeys: String, CodingKey {
@@ -31,7 +30,14 @@ class MutliAddressResponse : Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         transactions = try values.decode([Transaction].self, forKey: .transactions)
         
-        let balanceContainer = try values.nestedContainer(keyedBy: WalletCodingKeys.self, forKey: CodingKeys.wallet)
+        let balanceContainer = try values.nestedContainer(keyedBy: WalletCodingKeys.self, forKey: .wallet)
         finalBalance = try balanceContainer.decode(Satoshi.self, forKey: .finalBalance)
+        
+        addresses = try values.decode([NestedAddresses].self, forKey: .addresses).map { $0.address }
     }
+}
+
+// lightweight model to extract the multiple addresses from the response object 
+fileprivate class NestedAddresses: Codable {
+    let address: String
 }
